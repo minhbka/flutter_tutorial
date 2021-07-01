@@ -72,6 +72,7 @@ class Home extends StatelessWidget {
               ]
             ),
             FlightImageAsset(),
+            FlightBookingButton(),
           ],
         )
       )
@@ -86,4 +87,42 @@ class FlightImageAsset extends StatelessWidget{
     Image image = Image(image:assetImage, width:250.0, height:250.0);
     return Container(child:image);
   }
+}
+
+class FlightBookingButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin:EdgeInsets.only(top:30.0),
+      width:250.0, 
+      height:50.0,
+      child:ElevatedButton(
+        child: Text(
+          "Book Your Flight",
+          style:TextStyle(
+            color:Colors.white,
+            fontSize:20.0,
+            fontFamily: "Roboto",
+            fontWeight:FontWeight.w700
+          )
+        ),
+        onPressed: ()=> bookFlight(context),
+        style:ElevatedButton.styleFrom(
+          primary: Colors.deepOrange,
+          elevation: 6.0,  
+        )
+      )
+    );
+  }
+  void bookFlight(BuildContext context) {
+    var alertDialog = new AlertDialog(
+      title:Text("Flight Booked Successfully"),
+      content:Text("Have a good time")
+    );
+    showDialog(
+      context:context,
+      builder: (BuildContext context) => alertDialog
+    );
+  }
+
 }
