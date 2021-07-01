@@ -5,6 +5,11 @@ void main(){
       debugShowCheckedModeBanner: false,
       title: 'Simple Interest Calculator App',
       home: SIForm(),
+      theme: ThemeData(
+        primaryColor:Colors.indigo,
+        accentColor:Colors.indigoAccent,
+        brightness: Brightness.dark
+      )
     )
   );
 }
@@ -24,6 +29,7 @@ class _SIFormState extends State<SIForm>{
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = Theme.of(context).textTheme.subtitle1!;
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       appBar: AppBar(title:Text("Simple Interest Calculator App")),
@@ -36,8 +42,10 @@ class _SIFormState extends State<SIForm>{
           Padding(
             padding:EdgeInsets.all(_minimumPadding),
             child: TextField(
+              style: textStyle,
               keyboardType: TextInputType.number,
               decoration:InputDecoration(
+                labelStyle: textStyle,
                 labelText: 'Principal',
                 hintText: 'Enter Principal e.g. 12000',
                 border: OutlineInputBorder(
@@ -49,8 +57,10 @@ class _SIFormState extends State<SIForm>{
           Padding(
             padding:EdgeInsets.all(_minimumPadding),
             child: TextField(
+              style: textStyle,
               keyboardType: TextInputType.number,
               decoration:InputDecoration(
+                labelStyle: textStyle,
                 labelText: 'Rate of Interest',
                 hintText: 'In Percent',
                 border: OutlineInputBorder(
@@ -65,8 +75,10 @@ class _SIFormState extends State<SIForm>{
               children:<Widget>[
                 Expanded(
                   child: TextField(
+                    style:textStyle,
                     keyboardType: TextInputType.number,
                     decoration:InputDecoration(
+                      labelStyle: textStyle,
                       labelText: 'Term',
                       hintText: 'Time in years',
                       border: OutlineInputBorder(
@@ -97,16 +109,16 @@ class _SIFormState extends State<SIForm>{
                   child:ElevatedButton(
                     child: Text(
                       'Calculate',
+                      textScaleFactor: 1.5,
                       style:TextStyle(
-                        color:Colors.white,
-                        fontSize:20.0,
+                        color:Theme.of(context).primaryColor,
                         fontFamily: "Roboto",
-                        fontWeight:FontWeight.w700
+                        fontWeight:FontWeight.w300
                       )
                     ),
                     onPressed: ()=>{},
                     style:ElevatedButton.styleFrom(
-                      primary: Colors.deepOrange,
+                      primary: Theme.of(context).accentColor,
                       elevation: 6.0,  
                     )
                   )
@@ -116,16 +128,16 @@ class _SIFormState extends State<SIForm>{
                   child:ElevatedButton(
                     child: Text(
                       'Reset',
+                      textScaleFactor: 1.5,
                       style:TextStyle(
-                        color:Colors.white,
-                        fontSize:20.0,
+                        color:Theme.of(context).primaryColorLight,
                         fontFamily: "Roboto",
-                        fontWeight:FontWeight.w700
+                        fontWeight:FontWeight.w300
                       )
                     ),
                     onPressed: ()=>{},
                     style:ElevatedButton.styleFrom(
-                      primary: Colors.deepOrange,
+                      primary: Theme.of(context).primaryColorDark,
                       elevation: 6.0,  
                     )
                   )
