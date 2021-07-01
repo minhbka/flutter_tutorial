@@ -5,41 +5,27 @@ void main() {
     debugShowCheckedModeBanner: false,
     title: "Exploring UI widgets",
     home: Scaffold(
-      appBar: AppBar(title: Text("Basic List View")),
+      appBar: AppBar(title: Text("Long List")),
       body:getListView()
     ),
   ));
 }
+List<String> getListElements(){
+  var items = List<String>.generate(1000, (index) => "Item $index");
+  return items;
+}
+
 
 Widget getListView(){
-  var listView = new ListView(
-    children:<Widget>[
-      ListTile(
-        leading:Icon(Icons.landscape),
-        title: Text("Landscape"),
-        subtitle: Text("Beautiful View!"),
-        trailing:Icon(Icons.wb_sunny),
-        onTap: ()=>debugPrint("Landscape tapped"),
-      ),
-      ListTile(
-        leading:Icon(Icons.landscape),
-        title: Text("Window"),
-        subtitle: Text("Beautiful View!"),
-        trailing:Icon(Icons.wb_sunny),
-      ),
-      ListTile(
-        leading:Icon(Icons.landscape),
-        title: Text("Phone"),
-        subtitle: Text("Beautiful View!"),
-        trailing:Icon(Icons.wb_sunny),
-      ),
-      Text("Another element in List"),
-      Container(
-        margin:EdgeInsets.only(top:30.0),
-        color:Colors.red,
-        height: 50.0
-      )
-    ]
+  var listItem = getListElements();
+  var listView = ListView.builder(
+    itemBuilder: (context, index){
+      return ListTile(
+        leading: Icon(Icons.arrow_right),
+        title:Text(listItem[index]),
+        onTap:()=>debugPrint("${listItem[index]} was tapped"),
+      );
+    }
   );
   return listView;
 }
