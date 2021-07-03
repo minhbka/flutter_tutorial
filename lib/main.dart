@@ -1,74 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firts_prj/screens/note_detail.dart';
+import 'package:flutter_firts_prj/screens/note_list.dart';
+
 void main(){
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Stateful App Example',
-      home: FavoriteCity(),
-    )
-  );
+  runApp(MyApp());
 }
 
-class FavoriteCity extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() {
-    return _FavoriteCityState();
-  }
-}
-
-class _FavoriteCityState extends State<FavoriteCity>{
-  String nameCity ="";
-  var _currencies = ['Dollar', "Pound", "Korean Won", "VND"];
-  var _currentItemSelected = "Dollar";
+class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Stateful App Example')
+    return MaterialApp(
+      title: 'NoteKepper',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch:Colors.deepPurple
       ),
-      body: Container(
-        margin:EdgeInsets.all(20.0),
-        child:Column(
-          children:<Widget>[
-            TextField(
-              //onChange:
-              onSubmitted: (String userInput) => {
-                setState(()=> nameCity = userInput)
-              }
-            ),
-            DropdownButton<String>(
-              items: _currencies.map((String dropDownStringItem){
-                return DropdownMenuItem<String>(
-                  value: dropDownStringItem,
-                  child:Text(dropDownStringItem),
-                );
-              }).toList(),
-
-              onChanged: (String? newValueSelected){
-                _onDropDownItemSelected(newValueSelected);
-                
-              },
-              
-              value: _currentItemSelected,
-            ),
-            Padding(
-              padding:EdgeInsets.all(30.0),
-              child: Text(
-              "Your best city is " + nameCity,
-              style: TextStyle(fontSize: 20.0)
-            )
-            ),
-          ]
-        )
-      ),
+      home: NoteDetail(),
     );
-
-  }
-
-  void _onDropDownItemSelected(String newValueSelected){
-    setState((){
-      this._currentItemSelected = newValueSelected!;
-    });
   }
 
 }
