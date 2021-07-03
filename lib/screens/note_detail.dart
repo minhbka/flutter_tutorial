@@ -1,21 +1,37 @@
 import 'package:flutter/material.dart';
 
 class NoteDetail extends StatefulWidget{
+  String appBarTitle;
+  NoteDetail(this.appBarTitle);
   @override
   State<StatefulWidget> createState() {
-    return NoteDetailState();
+    return NoteDetailState(appBarTitle);
   }
 }
 
 class NoteDetailState extends State<NoteDetail>{
+  String appBarTitle;
+  NoteDetailState(this.appBarTitle);
   static var _priorities = ["High", "Low"];
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     TextStyle textStyle = Theme.of(context).textTheme.headline6!;
-    return Scaffold(
-      appBar: AppBar(title: Text("Edit Note"),),
+    return WillPopScope(
+      onWillPop: () async{
+        return moveToLastScreen();
+      },
+      child: Scaffold(
+      appBar: AppBar(
+        title: Text(appBarTitle,),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), 
+          onPressed: (){
+            moveToLastScreen();     
+          }
+        ),
+      ),
       body: Padding(
         padding:EdgeInsets.only(top:15.0, left:10.0, right:10.0),
         child: ListView(
@@ -88,11 +104,13 @@ class NoteDetailState extends State<NoteDetail>{
                   Expanded(
                     child: ElevatedButton(
                       child:Text("Delete",
+                        
                         textScaleFactor: 1.5,
                         style:TextStyle(
                           color:Theme.of(context).primaryColorLight,
                         )
                       ),
+                      
                       onPressed: ()=> debugPrint("Delete button clicked"),
                       style:ElevatedButton.styleFrom(
                         primary: Theme.of(context).primaryColorDark,
@@ -106,7 +124,12 @@ class NoteDetailState extends State<NoteDetail>{
           ],
       )
       )
+    )
     );
   }
 
+  bool moveToLastScreen(){
+    Navigator.pop(context);
+    return true;
+  }
 }
